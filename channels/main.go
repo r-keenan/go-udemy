@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 )
 
 func main() {
@@ -27,6 +28,11 @@ func main() {
 	// alternate way of doing the for loop above.
 	for l := range c {
 		go checkLink(l, c)
+		// this is a function literal. parenthesis add the end of the function are to invoke the function.
+		go func() {
+			time.Sleep(5 * time.Second)
+			checkLink(l, c)
+		}()
 	}
 }
 
