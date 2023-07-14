@@ -29,10 +29,10 @@ func main() {
 	for l := range c {
 		go checkLink(l, c)
 		// this is a function literal. parenthesis add the end of the function are to invoke the function.
-		go func() {
+		go func(link string) {
 			time.Sleep(5 * time.Second)
-			checkLink(l, c)
-		}()
+			checkLink(link, c)
+		}(l)
 	}
 }
 
